@@ -3,7 +3,7 @@ import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 
 const Header = () => {
-  const { removeBg } = useContext(AppContext);
+  const {removeBg}  = useContext(AppContext)
   return (
     <div className="flex items-center justify-between max-sm:flex-col-reverse gap-y-10 px-4 mt-10 lg:px-44 sm:mt-20 ">
       {/* LEFT SIDE */}

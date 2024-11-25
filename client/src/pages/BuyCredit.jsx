@@ -7,9 +7,10 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const BuyCredit = () => {
-  const { backendUrl, loadsCreditsData } = useContext(AppContext);
+  const { backendUrl, loadCreditsData } = useContext(AppContext);
   const navigate = useNavigate();
   const { getToken } = useAuth();
+
   const initPay = async (order) => {
     const options = {
       key: import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -23,11 +24,11 @@ const BuyCredit = () => {
         console.log(response);
         const token = await getToken()
         try {
-          const{data}=await axios.post(backendUrl+'/api/user/verify-razor',response,{headers:{token}})
+          const {data}=await axios.post(backendUrl+"/api/user/verify-razor",response,{headers:{token}})
           if (data.success) {
-            loadsCreditsData()
+            loadCreditsData()
             navigate('/')
-            toast.success('Credit Added')
+            toast.success("Credits Added")
           }
         } catch (error) {
           console.log(error)
@@ -35,8 +36,8 @@ const BuyCredit = () => {
         }
       },
     };
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+    const rzp = new window.Razorpay(options)
+    rzp.open()
   };
 
   const paymentRazorpay = async (planId) => {
